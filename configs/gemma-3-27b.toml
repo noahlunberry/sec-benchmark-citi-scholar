@@ -1,0 +1,31 @@
+[model]
+type = "LiteLLMModel"
+model_id = "openai/gemma-3-27b-it"
+api_key = "sk-5XaTPMTON5eWN8R64TBwRw"
+api_base = "https://api.ai.it.ufl.edu/v1"
+
+[agent]
+type = "ToolCallingAgent"
+max_steps = 30
+verbosity_level = 1
+tools = ["python_interpreter", "cmd"]
+
+[dataset]
+name = "SEC-bench/SEC-bench"
+split = "eval"
+instance_ids = ["njs.cve-2022-32414", "mruby.cve-2022-0240"]
+
+[output]
+output_dir = "E:/SEC-bench/results/gemma-3-27b"
+
+[docker]
+image_prefix = "hwiwonlee/secb.eval.x86_64"
+
+[docker.run_kwargs]
+mem_limit = "8g"
+network_mode = "host"
+auto_remove = true
+
+[task]
+type = "poc-repo"
+timeout_seconds = 3600

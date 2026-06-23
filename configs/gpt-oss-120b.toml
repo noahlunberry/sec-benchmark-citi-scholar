@@ -1,0 +1,31 @@
+[model]
+type = "LiteLLMModel"
+model_id = "openai/gpt-oss-120b"
+api_key = "sk-d0ZQS_cLZFdtyOTOBGF_Qg"
+api_base = "https://api.ai.it.ufl.edu/v1"
+
+[agent]
+type = "ToolCallingAgent"
+max_steps = 60
+verbosity_level = 1
+tools = ["python_interpreter", "cmd"]
+
+[dataset]
+name = "SEC-bench/SEC-bench"
+split = "eval"
+instance_ids = ["njs.cve-2022-32414", "mruby.cve-2022-0240"]
+
+[output]
+output_dir = "E:/SEC-bench/results/gpt-oss-120b"
+
+[docker]
+image_prefix = "hwiwonlee/secb.eval.x86_64"
+
+[docker.run_kwargs]
+mem_limit = "8g"
+network_mode = "host"
+auto_remove = true
+
+[task]
+type = "poc-repo"
+timeout_seconds = 3600
